@@ -4,6 +4,8 @@ from django.views import View
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from validate_email import validate_email
+from django.contrib.auth import login, authenticate, logout
+from django.contrib import messages
 
 class LoginView(View):
     def get(self, request):
@@ -33,3 +35,21 @@ class EmailValidationView(View):
 class RegisterView(View):
     def get(self, request):
         return render(request, 'authentication/sign_up.html')
+    
+    def post(self,request):
+        #Get user data
+        if request.method == 'POST':
+            username = request.POST['username']
+            email = request.POST['email']
+            password = request.POST['password']
+            
+            #Validation
+            if not User.objects.filter(username=username).exists():
+                if not User.objects.filter(email=email).exists():
+                    user = User.objects.create_user(username=username, email=email)
+                    user.set_password(password)
+                    user.save()
+                    messages.success(request, 'Account successfully created')
+                    return render(request, 'authentication/sign_up.html')
+        return render(request, 'authentication/sign_up.html')
+    
