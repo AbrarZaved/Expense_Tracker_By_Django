@@ -9,14 +9,11 @@ const passwordlen = document.querySelector('#passwordField');
 const passwordlength = document.querySelector('.passwordlen');
 
 passwordlen.addEventListener('keyup', (e) => {
-    console.log('88',88);
     passwordlength.style.display = 'none';
     const passwordVal = e.target.value;
-    if (passwordVal.length < 6) {
+    if (passwordVal.length < 6 && passwordVal.length > 0) {
         passwordlength.style.display = 'block';
         passwordlength.innerHTML = `<p style="font-size: 12px;">Password must be at least 6 characters</p>`;
-    } else {
-        showPassword.style.display = 'block';
     }
 });
 
