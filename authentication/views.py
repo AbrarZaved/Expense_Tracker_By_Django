@@ -53,3 +53,20 @@ class RegisterView(View):
                     return render(request, 'authentication/sign_up.html')
         return render(request, 'authentication/sign_up.html')
     
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return render(request, 'authentication/sign_in.html')
+
+class LoginAuthView(View):
+    def post(self, request):
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return render(request, 'expenses/index.html')
+        else:
+            messages.error(request, 'Invalid credentials')
+            return render(request, 'authentication/sign_in.html')
