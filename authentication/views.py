@@ -57,6 +57,7 @@ class RegisterView(View):
 class LogoutView(View):
     def get(self, request):
         logout(request)
+        messages.success(request, 'You have been logged out')
         return render(request, 'authentication/sign_in.html')
 
 class LoginAuthView(View):
