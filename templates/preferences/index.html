@@ -13,7 +13,6 @@
         <select class="form-select" id="inputGroupSelect04" name="currency" aria-label="Example select with button addon">
         {% if user_preferences.currency %}
             <option name="currency" value="{{ user_preferences.currency }}" selected>{{ user_preferences.currency }}</option>
-        
         {% else %}
         {% endif %}</option>
         {% for item in currency  %}
