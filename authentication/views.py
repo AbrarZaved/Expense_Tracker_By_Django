@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import json
 from django.views import View
 from django.http import JsonResponse
@@ -67,7 +67,7 @@ class LoginAuthView(View):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return render(request, 'expenses/index.html')
+            return redirect('index')
         else:
             messages.error(request, 'Invalid credentials')
             return render(request, 'authentication/sign_in.html')
