@@ -2,7 +2,7 @@ from django.db import models
 import os
 import json
 from django.conf import settings
-
+from django.contrib.auth.models import User
 # Create your models here.
 currency = []
 file_path = os.path.join(settings.BASE_DIR, 'currencies.json')
@@ -23,7 +23,7 @@ class Add_Expense(models.Model):
         "Other": "Other",
     }
     
-    
+    user = models.ForeignKey(User, on_delete=models.CASCADE,default=User)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     currency = models.CharField(choices=currency)
     description = models.TextField()

@@ -8,9 +8,8 @@ from django.core.paginator import Paginator
 # Create your views here.
 @login_required(login_url='/authentication/')
 def index(request):
-    
-    data = Add_Expense.objects.all()
-    paginator = Paginator(data, 3)
+    data = Add_Expense.objects.filter(user=request.user)
+    paginator = Paginator(data, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'expenses/index.html', {'data': data, 'page_obj': page_obj})
@@ -18,10 +17,13 @@ def index(request):
 def add_expense(request):
     form = ExpenseForm()
     if request.method == 'POST':
-        form = ExpenseForm(request.POST)
+        form = ExpenseForm(request.POST or None)
         if form.is_valid():
-            form.save()
-            return render(request, 'expenses/add_expense.html', {'form': form})
+            expense = form.save(commit=False)
+            expense.user = request.user
+            expense.save()
+            message.success(request, 'Expense added successfully')
+            return redirect('index')
     return render(request, 'expenses/add_expense.html', {'form': form})
 
 def delete_expense(request, id):

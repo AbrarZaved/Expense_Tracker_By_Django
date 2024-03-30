@@ -16,7 +16,7 @@
 
 <div class="container rounded-2 shadow" style="margin-top: 20px;">
     <h2 class="mt-4" >Add Expense</h2>
-    <form class="mt-3" method="POST">
+    <form class="mt-3" method="POST" action="{% url 'expense' %}">
         {% csrf_token %}
         <div class="form-row">
         <div class="form-group col-12">
