@@ -25,9 +25,9 @@ class Add_expense(models.Model):
     
     
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    currency = models.CharField(choices=currency)
+    currency = models.CharField(choices=currency,max_length=10)
     description = models.TextField()
-    category = models.CharField(choices=list(category_type.items()))
+    category = models.CharField(choices=list(category_type.items()), max_length=20) 
     date = models.DateField()
     
     def __str__(self):

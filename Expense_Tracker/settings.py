@@ -79,11 +79,8 @@ WSGI_APPLICATION = 'Expense_Tracker.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'income_expenses',
-        'USER': 'postgres',
-        'PASSWORD': 'admin',
-        'HOST':'localhost',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
