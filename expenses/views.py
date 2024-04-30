@@ -1,14 +1,13 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from .forms import ExpenseForm
-from .models import Add_Expense
+from .models import Add_expense
 from django.contrib import messages as message
-from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 # Create your views here.
 @login_required(login_url='/authentication/')
 def index(request):
-    data = Add_Expense.objects.filter(user=request.user)
+    data = Add_expense.objects.all()
     paginator = Paginator(data, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -27,13 +26,13 @@ def add_expense(request):
     return render(request, 'expenses/add_expense.html', {'form': form})
 
 def delete_expense(request, id):
-    data = Add_Expense.objects.get(pk=id)
+    data = Add_expense.objects.get(pk=id)
     data.delete()
     message.success(request, 'Expense deleted successfully')
     return redirect('index')
 
 def edit_expense(request, id):
-    data = Add_Expense.objects.get(pk=id)
+    data = Add_expense.objects.get(pk=id)
     form = ExpenseForm(instance=data)
     if request.method == 'POST':
         form = ExpenseForm(request.POST, instance=data)

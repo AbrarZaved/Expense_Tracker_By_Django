@@ -1,11 +1,11 @@
 from django.forms import ModelForm
 from django import forms
 
-from .models import Add_Expense
+from .models import Add_expense
 
 class ExpenseForm(ModelForm):
     class Meta:
-        model = Add_Expense
+        model = Add_expense
         fields = '__all__'
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
