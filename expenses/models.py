@@ -23,7 +23,7 @@ class Add_expense(models.Model):
         "Other": "Other",
     }
     
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=False, blank=False)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     currency = models.CharField(choices=currency,max_length=10)
     description = models.TextField()
