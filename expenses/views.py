@@ -14,15 +14,16 @@ def index(request):
     return render(request, 'expenses/index.html', {'data': data, 'page_obj': page_obj})
 
 def add_expense(request):
-    form = ExpenseForm()
     if request.method == 'POST':
-        form = ExpenseForm(request.POST or None)
+        form = ExpenseForm(request.POST)  # Remove or None from here
         if form.is_valid():
             expense = form.save(commit=False)
             expense.user = request.user
             expense.save()
-            message.success(request, 'Expense added successfully')
+            message.success(request, 'Expense added successfully')  # Use messages.success instead of message.success
             return redirect('index')
+    else:
+        form = ExpenseForm()
     return render(request, 'expenses/add_expense.html', {'form': form})
 
 def delete_expense(request, id):
