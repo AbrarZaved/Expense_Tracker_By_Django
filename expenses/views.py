@@ -15,12 +15,12 @@ def index(request):
 
 def add_expense(request):
     if request.method == 'POST':
-        form = ExpenseForm(request.POST)  # Remove or None from here
+        form = ExpenseForm(request.POST)  
         if form.is_valid():
             expense = form.save(commit=False)
             expense.user = request.user
             expense.save()
-            message.success(request, 'Expense added successfully')  # Use messages.success instead of message.success
+            message.success(request, 'Expense added successfully') 
             return redirect('index')
     else:
         form = ExpenseForm()
