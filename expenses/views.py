@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 # Create your views here.
 @login_required(login_url='/authentication/')
 def index(request):
-    data = Add_expense.objects.all()
+    data = Add_expense.objects.filter(user=request.user)
     paginator = Paginator(data, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
