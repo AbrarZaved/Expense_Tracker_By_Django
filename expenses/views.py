@@ -4,7 +4,20 @@ from .forms import ExpenseForm
 from .models import Add_expense
 from django.contrib import messages as message
 from django.core.paginator import Paginator
+from django.http import JsonResponse
+import json
 # Create your views here.
+
+
+def search_expense(request):
+    if request.method == 'POST':
+        search = json.loads(request.body).get('searchText')
+        expenses = Add_expense.objects.filter(amount__icontains=search, user=request.user) | Add_expense.objects.filter(category__icontains=search, user=request.user) | Add_expense.objects.filter(date__icontains=search, user=request.user) | Add_expense.objects.filter(description__icontains=search, user=request.user)
+        data = expenses.values()
+        return JsonResponse(list(data), safe=False)
+
+
+
 @login_required(login_url='/authentication/')
 def index(request):
     data = Add_expense.objects.filter(user=request.user)
