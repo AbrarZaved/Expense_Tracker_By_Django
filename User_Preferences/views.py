@@ -13,19 +13,8 @@ def setting(request):
         data = json.load(json_file)
         for key, value in data.items():
             currency.append({'name': key, 'value': value})
-    existing_user_preferences = UserPreferences.objects.filter(user=request.user)
-    if existing_user_preferences.exists():
-        user_preferences = UserPreferences.objects.get(user=request.user)
-    user_preferences = UserPreferences.objects.get(user=request.user)  
-    if request.method=='POST':
+    if request.method == 'POST':
         selected_currency = request.POST['currency']
-        if existing_user_preferences.exists():
-            user_preferences.currency = selected_currency
-            user_preferences.save()  
-        else:           
-            UserPreferences.objects.create(user=request.user, currency=request.POST['currency'])
-        messages.success(request, 'Changes saved successfully')
-        return render(request, 'preferences/index.html', {'currency': currency, 'user_preferences': user_preferences})
-        
-    return render(request, 'preferences/index.html', {'currency': currency, 'user_preferences': user_preferences})
-    
+        UserPreferences.objects.update_or_create(user=request.user, defaults={'currency': selected_currency})
+        messages.success(request, 'Changes saved')
+    return render(request, 'preferences/index.html', {'currency': currency})

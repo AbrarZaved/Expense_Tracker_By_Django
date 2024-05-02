@@ -6,6 +6,7 @@ from django.contrib import messages as message
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 import json
+from User_Preferences.models import UserPreferences
 # Create your views here.
 
 
@@ -21,10 +22,11 @@ def search_expense(request):
 @login_required(login_url='/authentication/')
 def index(request):
     data = Add_expense.objects.filter(user=request.user)
+    currency = UserPreferences.objects.get(user=request.user).currency
     paginator = Paginator(data, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'expenses/index.html', {'data': data, 'page_obj': page_obj})
+    return render(request, 'expenses/index.html', {'data': data, 'page_obj': page_obj, 'currency': currency})   
 
 def add_expense(request):
     if request.method == 'POST':
