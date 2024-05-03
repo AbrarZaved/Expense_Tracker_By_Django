@@ -57,3 +57,6 @@ def edit_expense(request, id):
             message.success(request, 'Expense updated successfully')
             return redirect('index')
     return render(request, 'expenses/edit_expense.html', {'form': form})
+
+
+

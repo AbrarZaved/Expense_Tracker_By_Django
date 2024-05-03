@@ -25,3 +25,4 @@ class Add_expense(models.Model):
     
     def __str__(self):
         return self.category
+    
