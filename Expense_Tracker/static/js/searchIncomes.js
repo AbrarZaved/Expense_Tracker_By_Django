@@ -29,16 +29,16 @@ searchField.addEventListener('keyup', (e) => {
                     noResults.style.display = 'block';
                 } else {
                     noResults.style.display = 'none';
-                    data.forEach((expense) => {
+                    data.forEach((income) => {
                         tableBody.innerHTML+= `
                         <tr>
-                            <td>${expense.amount}</td>
-                            <td>${expense.description}</td>
-                            <td>${expense.date}</td>
-                            <td>${expense.source}</td>
+                            <td>${income.amount}</td>
+                            <td>${income.description}</td>
+                            <td>${income.date}</td>
+                            <td>${income.source}</td>
                             <td>
-                            <a href="{% url 'edit' expense.id %}" type="button" class="btn btn-outline-info">Edit</a>
-                            <a href="{% url 'delete' expense.id %}" class="btn btn-outline-danger"><i class="bi bi-x-circle"></i></a>
+                            <a href="{% url 'edit' income.id %}" type="button" class="btn btn-outline-info">Edit</a>
+                            <a href="{% url 'delete' income.id %}" class="btn btn-outline-danger"><i class="bi bi-x-circle"></i></a>
                         </td>
                         </tr>
                         `;
@@ -47,6 +47,7 @@ searchField.addEventListener('keyup', (e) => {
                 
             });
     } else {
+        noResults.style.display = 'none';
         tableOutput.style.display = 'none';
         appTable.style.display = 'block';
         paginationContainer.style.display = 'block';
