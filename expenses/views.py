@@ -23,7 +23,7 @@ def search_expense(request):
 def index(request):
     data = Add_expense.objects.filter(user=request.user)
     currency = UserPreferences.objects.get(user=request.user).currency
-    paginator = Paginator(data, 5)
+    paginator = Paginator(data, 3)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'expenses/index.html', {'data': data, 'page_obj': page_obj, 'currency': currency})   
