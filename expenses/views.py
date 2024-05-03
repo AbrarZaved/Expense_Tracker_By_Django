@@ -7,6 +7,7 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 import json
 from User_Preferences.models import UserPreferences
+import datetime
 # Create your views here.
 
 
@@ -17,7 +18,13 @@ def search_expense(request):
         data = expenses.values()
         return JsonResponse(list(data), safe=False)
 
-
+def all_expenses(request):
+    data = Add_expense.objects.filter(user=request.user)
+    currency = UserPreferences.objects.get(user=request.user).currency
+    paginator = Paginator(data, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'expenses/all_expenses.html', {'data': data, 'page_obj': page_obj, 'currency': currency})
 
 @login_required(login_url='/authentication/')
 def index(request):
@@ -60,3 +67,26 @@ def edit_expense(request, id):
 
 
 
+
+def expense_category_summary(request):
+    today = datetime.date.today()
+    six_months_ago = today - datetime.timedelta(days=30*6)
+    expenses = Add_expense.objects.filter(user=request.user, date__gte=six_months_ago, date__lte=today)
+    
+    finalrep = {}
+
+    def get_category_amount(category):
+        filtered_by_category = expenses.filter(category=category)
+        amount = sum(item.amount for item in filtered_by_category)
+        return amount
+
+    category_list = set(expense.category for expense in expenses)
+    print(category_list)
+    for category in category_list:
+        finalrep[category] = get_category_amount(category)
+    print(finalrep)
+    return JsonResponse({'category_data': finalrep}, safe=False)
+
+def stats_view(request):
+    return render(request, 'expenses/stats.html')
+    

@@ -14,9 +14,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" href="{% url 'expense' %}">
+            <a class="nav-link d-flex align-items-center gap-2" href="{% url 'all_expenses' %}">
               <svg class="bi"><use xlink:href="#file-earmark"/></svg>
-              Expenses
+              My Expenses
             </a>
           </li>
           <li class="nav-item">
@@ -35,7 +35,7 @@
         </h6>
         <ul class="nav flex-column mb-auto">
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" href="#">
+            <a class="nav-link d-flex align-items-center gap-2" href="{% url "stat" %}">
               <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
               Expense Summery
             </a>
@@ -44,18 +44,6 @@
             <a class="nav-link d-flex align-items-center gap-2" href="#">
               <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
               Income Summery
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" href="#">
-              <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
-              Social engagement
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" href="#">
-              <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
-              Year-end sale
             </a>
           </li>
         </ul>
@@ -73,31 +61,12 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" href="#">
-              <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
-              Account Settings
-            </a>
-          </li>
-        </ul>
-
-        <hr class="my-3">
-
-        <ul class="nav flex-column mb-auto">
-          <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" href="#">
-              <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg>
-              Settings
-            </a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link d-flex align-items-center gap-2" href="{% url 'logout' %}">
               <svg class="bi"><use xlink:href="#door-closed"/></svg>
               Sign out
             </a>
           </li>
         </ul>
-        
-
       </div>
     </div>
   </div>
