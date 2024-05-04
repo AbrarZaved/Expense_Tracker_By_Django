@@ -13,7 +13,7 @@ with open(file_path, 'r') as json_file:
         currency.append((key, f"{key}-{value}"))
 
 
-class Add_Expense(models.Model):
+class Add_expense(models.Model):
     category_type = {
         "Rent": "Rent",
         "Food": "Food",
@@ -23,7 +23,7 @@ class Add_Expense(models.Model):
         "Other": "Other",
     }
     
-    user = models.ForeignKey(User, on_delete=models.CASCADE,default=User)
+    
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     currency = models.CharField(choices=currency)
     description = models.TextField()
