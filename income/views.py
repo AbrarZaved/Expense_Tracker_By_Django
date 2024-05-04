@@ -6,7 +6,7 @@ from django.contrib import messages as message
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 import json
-from User_Preferences.models import 
+from User_Preferences.models import UserPreferences
 
 
 @login_required(login_url='/authentication/')
