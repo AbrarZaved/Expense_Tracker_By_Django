@@ -1,12 +1,12 @@
 console.log('main.js')/* globals Chart:false */
 
-(() => {
+new Graph(() => {
     'use strict'
   
     // Graphs
-    const ctx = document.getElementById('myChart')
+    const ctx = document.getElementById('yourChart')
     // eslint-disable-next-line no-unused-vars
-    const myChart = new Chart(ctx, {
+    const yourChart = new Chart(ctx, {
       type: 'line',
       data: {
         labels: [
