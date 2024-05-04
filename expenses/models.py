@@ -6,10 +6,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> af0cd1832d7c4fd2ea2a879ae605f836e197b9e7
 class Add_expense(models.Model):
     category_type = {
         "Rent": "Rent",
@@ -20,11 +16,7 @@ class Add_expense(models.Model):
         "Other": "Other",
     }
     
-<<<<<<< HEAD
     
-=======
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
->>>>>>> af0cd1832d7c4fd2ea2a879ae605f836e197b9e7
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
     category = models.CharField(choices=list(category_type.items()), max_length=20) 

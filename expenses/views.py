@@ -9,12 +9,6 @@ import json
 from User_Preferences.models import UserPreferences
 import datetime
 # Create your views here.
-<<<<<<< HEAD
-@login_required(login_url='/authentication/')
-def index(request):
-    data = Add_expense.objects.all()
-    paginator = Paginator(data, 5)
-=======
 
 
 def search_expense(request):
@@ -28,7 +22,6 @@ def all_expenses(request):
     data = Add_expense.objects.filter(user=request.user)
     currency = UserPreferences.objects.get(user=request.user).currency
     paginator = Paginator(data, 10)
->>>>>>> af0cd1832d7c4fd2ea2a879ae605f836e197b9e7
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'expenses/all_expenses.html', {'data': data, 'page_obj': page_obj, 'currency': currency})
