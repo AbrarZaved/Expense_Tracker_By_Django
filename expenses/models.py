@@ -16,7 +16,7 @@ class Add_expense(models.Model):
         "Other": "Other",
     }
     
-    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
     category = models.CharField(choices=list(category_type.items()), max_length=20) 
