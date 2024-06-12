@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-
 class Add_expense(models.Model):
     category_type = {
         "Rent": "Rent",
