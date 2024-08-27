@@ -12,7 +12,7 @@ from User_Preferences.models import UserPreferences
 @login_required(login_url='/authentication/')
 def index(request):
     data = Add_income.objects.filter(user=request.user)
-    currency = UserPreferences.objects.get(user=request.user).currency
+    currency = UserPreferences.objects.all()        
     paginator = Paginator(data, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
