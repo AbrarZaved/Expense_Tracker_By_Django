@@ -20,11 +20,11 @@ def search_expense(request):
 
 def all_expenses(request):
     data = Add_expense.objects.filter(user=request.user)
-    currency = UserPreferences.objects.get(user=request.user).currency
+    
     paginator = Paginator(data, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'expenses/all_expenses.html', {'data': data, 'page_obj': page_obj, 'currency': currency})
+    return render(request, 'expenses/all_expenses.html', {'data': data, 'page_obj': page_obj})
 
 @login_required(login_url='/authentication/')
 def index(request):
